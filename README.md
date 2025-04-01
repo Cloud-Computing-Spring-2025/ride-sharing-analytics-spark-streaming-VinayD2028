@@ -84,6 +84,41 @@ By the end of this assignment, you should be able to:
 2. Task 2: Perform real-time aggregations on driver earnings and trip distances.
 3. Task 3: Analyze trends over time using a sliding time window.
 
+## **Task 1: Basic Streaming Ingestion and Parsing**
+
+1. Ingest streaming data from the provided socket (e.g., localhost:9999) using Spark Structured Streaming.
+2. Parse the incoming JSON messages into a Spark DataFrame with proper columns (trip_id, driver_id, distance_km, fare_amount, timestamp).
+
+## **Instructions:**
+1. Create a Spark session.
+2. Use spark.readStream.format("socket") to read from localhost:9999.
+3. Parse the JSON payload into columns.
+4. Print the parsed data to the console (using .writeStream.format("console")).
+
+## **Task 2: Real-Time Aggregations (Driver-Level)**
+
+1. Aggregate the data in real time to answer the following questions:
+  • Total fare amount grouped by driver_id.
+  • Average distance (distance_km) grouped by driver_id.
+2. Output these aggregations to the console in real time.
+
+## **Instructions:**
+1. Reuse the parsed DataFrame from Task 1.
+2. Group by driver_id and compute:
+3. SUM(fare_amount) as total_fare
+4. AVG(distance_km) as avg_distance
+5. Store the result in csv
+
+## **Task 3: Windowed Time-Based Analytics**
+
+1. Convert the timestamp column to a proper TimestampType.
+2. Perform a 5-minute windowed aggregation on fare_amount (sliding by 1 minute).
+
+## **Instructions:**
+
+1. Convert the string-based timestamp column to a TimestampType column (e.g., event_time).
+2. Use Spark’s window function to aggregate over a 5-minute window, sliding by 1 minute, for the sum of fare_amount.
+3. Output the windowed results to csv.
 
 ## 📬 Submission Checklist
 
@@ -96,4 +131,3 @@ By the end of this assignment, you should be able to:
 ---
 
 Now go uncover the trends behind the tweets 📊🐤✨
-
